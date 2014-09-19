@@ -12,7 +12,7 @@ namespace insolita\widgets;
 use kartik\nav\NavX;
 use yii\bootstrap\Nav;
 use yii\bootstrap\Widget;
-use insolita\helpers\Helper;
+use \insolita\things\helpers\Helper;
 use yii\caching\DbDependency;
 use yii\helpers\Url;
 
@@ -39,9 +39,6 @@ class TopMenu extends Widget
     public function init()
     {
         parent::init();
-        if (!$this->baseurl) {
-            $this->baseurl = \Yii::$app->params['siteurl'];
-        }
     }
 
     public function run()

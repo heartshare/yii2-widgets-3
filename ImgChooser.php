@@ -35,7 +35,7 @@ class ImgChooser extends InputWidget
     /**
      * @var mixed (array|string) $remote - url to source
      */
-    public $remote=['/content/cover/cover/index'];
+    public $remote = ['/content/cover/cover/index'];
 
     private $target_id;
     private $_tpl;
@@ -104,7 +104,7 @@ class ImgChooser extends InputWidget
                         myDialog.close();
                 });');
         $view = $this->getView();
-        $view->registerJs(implode("", $js),View::POS_READY, 'imgchooser' . $this->id);
+        $view->registerJs(implode("", $js), View::POS_READY, 'imgchooser' . $this->id);
     }
 
 } 
