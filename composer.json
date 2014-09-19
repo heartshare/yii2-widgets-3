@@ -1,0 +1,21 @@
+{
+    "name": "insolita/yii2-widgets",
+    "description": "in develop",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name": "insolita",
+            "email": "donnainsolita@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "insolita\\widgets\\": ""
+        }
+    }
+}
