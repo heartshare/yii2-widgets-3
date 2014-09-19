@@ -10,8 +10,13 @@
             "email": "donnainsolita@gmail.com"
         }
     ],
+	"repositories":[{
+		"type":"git",
+		"url":"https://github.com/Insolita/yii2-things.git"
+	}],
     "require": {
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+	    "insolita/yii2-things":"dev-master"
     },
     "autoload": {
         "psr-4": {

@@ -9,7 +9,7 @@
 namespace insolita\widgets\Dialog;
 
 
-use insolita\helpers\Helper;
+use insolita\things\helpers\Helper;
 use yii\bootstrap\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;

@@ -9,8 +9,6 @@
 namespace insolita\widgets\Dialog;
 
 
-use insolita\helpers\Helper;
-use widgets\FormDialog\FormDialogAssets;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Widget;
 use yii\helpers\ArrayHelper;

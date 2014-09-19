@@ -13,7 +13,7 @@ use yii\web\AssetBundle;
 
 class DialogAssets extends AssetBundle
 {
-    public $sourcePath = '@app/widgets/FormDialog/asset';
+    public $sourcePath = '@vendor/insolita/yii2-widgets/Dialog/asset';
     public $js
         = [
             'jquery.hotkeys.js',
