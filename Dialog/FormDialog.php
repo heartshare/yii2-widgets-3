@@ -207,7 +207,9 @@ class FormDialog extends Widget
 
         $js
             = <<<JS
+
                $(document).on('click','{$this->selector}',function(e){
+                    e.preventDefault();
                     myBootstrapDialog($(this).data('link'),'size-{$this->size}','type-{$this->style}','$this->title',$buttons, $onshown, '{$this->pjaxSelector}');
                });
 JS;
