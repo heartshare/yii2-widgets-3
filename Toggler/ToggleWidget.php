@@ -5,8 +5,11 @@
  * Date: 24.09.14
  * Time: 22:56
  */
-
-class ToggleWidget extends \yii\bootstrap\Widget{
+namespace insolita\widgets\Toggler;
+use yii\bootstrap\Widget;
+use yii\base\InvalidConfigException;
+use yii\helpers\Html;
+class ToggleWidget extends Widget{
 
     public $on=1;
 
@@ -18,13 +21,13 @@ class ToggleWidget extends \yii\bootstrap\Widget{
 
     public $callback='function(){}';
 
-    public $url=['toggle'];
+    public $url=null;
 
-    public $elem;
+    public $value;
 
     public function init(){
-        if(!$this->url || !$this->offHtml || !$this->onHtml || $this->on || $this->off){
-            throw new \yii\base\InvalidConfigException("Wrong settings");
+        if(!$this->url || !$this->offHtml || !$this->onHtml || !in_array($this->value,[$this->on, $this->off])){
+            throw new InvalidConfigException("Wrong settings");
         }
         parent::init();
         if(!$this->id && !isset($this->options['id'])){
@@ -34,17 +37,19 @@ class ToggleWidget extends \yii\bootstrap\Widget{
     }
 
     public function run(){
-        $txt=($this->elem==$this->on)?$this->onHtml:$this->offHtml;
-        echo \yii\helpers\Html::a($txt,$this->url,[]);
+        $txt=($this->value==$this->on)?$this->onHtml:$this->offHtml;
+        echo Html::a($txt,$this->url,$this->options);
     }
 
     public function registerJs(){
         $view=$this->getView();
+        ToggleAsset::register($view);
         $selector = "#{$this->id}";
         $callback = $this->callback ? : 'function(){}';
         $js[] = "sollyscript.toggler.onHtml='{$this->onHtml}'";
         $js[] = "sollyscript.toggler.offHtml='{$this->offHtml}'";
         $js[] = "sollyscript.toggler.registerHandler('$selector', $callback);";
+        $view->registerJs(implode("\n", $js));
     }
 
 }

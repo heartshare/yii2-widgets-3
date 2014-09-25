@@ -90,36 +90,42 @@ class TopMenu extends Widget
                         //unset($this->_menu[$item->id]['url']);
                         /**@var \insolita\menu\models\Menu $child * */
                         foreach ($item->childs as $child) {
-                            $ch2 = $model::checkPerm($child->visexpr);
-                            if ($ch2) {
-                                $link = (strpos($child->url, 'http') !== false
-                                    or strpos($child->url, 'html') !== false
-                                    or $child->url == '#')
-                                    ? $child->url : $this->baseurl . Url::toRoute([$child->url]);
-                                $this->_menu[$item->id]['items'][$child->id] = [
-                                    'label' => ($this->showallicon ? Helper::FA($child->icon) : '') . $child->name,
-                                    'url' => $link,
-                                    'linkOptions' => $this->linkOptions,
-                                ];
-                                if ($child->childs) {
-                                    /**@var \insolita\menu\models\Menu $subchild * */
-                                    foreach ($child->childs as $subchild) {
-                                        $ch3 = $model::checkPerm($subchild->visexpr);
-                                        if ($ch3) {
-                                            $link = (strpos($subchild->url, 'http') !== false
-                                                or strpos($subchild->url, 'html') !== false
-                                                or $subchild->url == '#')
-                                                ? $subchild->url : $this->baseurl . Url::toRoute([$subchild->url]);
-                                            $this->_menu[$item->id]['items'][$child->id]['items'][$subchild->id] = [
-                                                'label' => ($this->showallicon ? Helper::FA($subchild->icon) : "")
-                                                    . $subchild->name,
-                                                'url' => $link,
-                                                'linkOptions' => $this->linkOptions,
-                                            ];
+                            if($child->active){
+                                $ch2 = $model::checkPerm($child->visexpr);
+                                if ($ch2) {
+                                    $link = (strpos($child->url, 'http') !== false
+                                        or strpos($child->url, 'html') !== false
+                                        or $child->url == '#')
+                                        ? $child->url : $this->baseurl . Url::toRoute([$child->url]);
+                                    $this->_menu[$item->id]['items'][$child->id] = [
+                                        'label' => ($this->showallicon ? Helper::FA($child->icon) : '') . $child->name,
+                                        'url' => $link,
+                                        'linkOptions' => $this->linkOptions,
+                                    ];
+                                    if ($child->childs) {
+                                        /**@var \insolita\menu\models\Menu $subchild * */
+                                        foreach ($child->childs as $subchild) {
+                                            if($subchild->active){
+                                                $ch3 = $model::checkPerm($subchild->visexpr);
+                                                if ($ch3) {
+                                                    $link = (strpos($subchild->url, 'http') !== false
+                                                        or strpos($subchild->url, 'html') !== false
+                                                        or $subchild->url == '#')
+                                                        ? $subchild->url : $this->baseurl . Url::toRoute([$subchild->url]);
+                                                    $this->_menu[$item->id]['items'][$child->id]['items'][$subchild->id] = [
+                                                        'label' => ($this->showallicon ? Helper::FA($subchild->icon) : "")
+                                                            . $subchild->name,
+                                                        'url' => $link,
+                                                        'linkOptions' => $this->linkOptions,
+                                                    ];
+                                                }
+                                            }
+
                                         }
                                     }
                                 }
                             }
+
                         }
 
                     }
