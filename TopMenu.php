@@ -77,8 +77,8 @@ class TopMenu extends Widget
             /**@var \insolita\menu\models\Menu $item * */
             foreach ($this->menudata as $item) {
                 if ($model::checkPerm($item->visexpr)) {
-                    $link = (strpos($item->url, 'http') !== false
-                        or strpos($item->url, 'html') !== false
+                    $link = (mb_strpos($item->url, 'http', null, \Yii::$app->charset) !== false
+                        or mb_strpos($item->url, 'html', null, \Yii::$app->charset) !== false
                         or $item->url == '#')
                         ? $item->url : $this->baseurl . Url::toRoute([$item->url]);
                     $this->_menu[$item->id] = [
@@ -93,8 +93,8 @@ class TopMenu extends Widget
                             if($child->active){
                                 $ch2 = $model::checkPerm($child->visexpr);
                                 if ($ch2) {
-                                    $link = (strpos($child->url, 'http') !== false
-                                        or strpos($child->url, 'html') !== false
+                                    $link = (mb_strpos($child->url, 'http', null, \Yii::$app->charset) !== false
+                                        or mb_strpos($child->url, 'html', null, \Yii::$app->charset) !== false
                                         or $child->url == '#')
                                         ? $child->url : $this->baseurl . Url::toRoute([$child->url]);
                                     $this->_menu[$item->id]['items'][$child->id] = [
@@ -108,8 +108,11 @@ class TopMenu extends Widget
                                             if($subchild->active){
                                                 $ch3 = $model::checkPerm($subchild->visexpr);
                                                 if ($ch3) {
-                                                    $link = (strpos($subchild->url, 'http') !== false
-                                                        or strpos($subchild->url, 'html') !== false
+                                                    $link = (mb_strpos(
+                                                            $subchild->url, 'http', null, \Yii::$app->charset
+                                                        ) !== false
+                                                        or mb_strpos($subchild->url, 'html', null, \Yii::$app->charset)
+                                                        !== false
                                                         or $subchild->url == '#')
                                                         ? $subchild->url : $this->baseurl . Url::toRoute([$subchild->url]);
                                                     $this->_menu[$item->id]['items'][$child->id]['items'][$subchild->id] = [
